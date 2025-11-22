@@ -14,31 +14,29 @@
 <div class="mx-5">
 <table class="table">
 <?php
-$row = 0;
+$row = 1;
 if (($handle = fopen("movies.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-	    $num = count($data);
-	    /* For first row, generate headers */
-	    if($row == 0){
-		    $output = "<thead><tr>";
-			for($c=0; $c < $num; $c++) {
-				$output .= "<th scope='col'>" . $data[$c] . "</th>";
-		}
-		    $output .= "</tr></thead><tbody>";
-		    echo $output;
-		    $row++;
+	$data = fgetcsv($handle,0,",");
+	$headers = array_splice($data, 0);
+	
+	// Header	
+	$output = "<thead><tr>";
+	foreach($headers as $val){
+		$output .= "<th scope='col'>" . $val . "</th>";
+	}
+	echo $output . "</tr></thead><tbody>\n";
 
-	    }else{
-		/* Not headers? Generate body */
-		    $output = "<tr>";
-		    for ($c=0; $c < $num; $c++) {
-			    $output .= "<td>" . $data[$c] . "</td>";
-		    }
-		    $output .= "</tr>\n";	
-		    echo $output;
-		    $row++;
+	// Entry rows
+	while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
+	    $num = count($data);
+	    $output = "<tr>";
+	    for ($c=0; $c < $num; $c++) {
+		    $output .= "<td>" . $data[$c] . "</td>";
 	    }
-    }
+	    $output .= "</tr>\n";	
+	    echo $output;
+	    $row++;
+	    }
     echo "</tbody>";
     fclose($handle);
 }
