@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 
+<!-- Bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -8,48 +9,40 @@
 
 </head>
 
-
-
 <body>
-
-
-<!-- Main content table here -->
+<!-- Main content table below -->
 <div class="mx-5">
 <table class="table">
-
 <?php
-
 $row = 0;
 if (($handle = fopen("movies.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-		$num = count($data);
-		if($row == 0){
-			$output = "<thead><tr>";
-		for($c=0; $c < $num; $c++) {
-			$output .= "<th scope='col'>" . $data[$c] . "</th>";
+	    $num = count($data);
+	    /* For first row, generate headers */
+	    if($row == 0){
+		    $output = "<thead><tr>";
+			for($c=0; $c < $num; $c++) {
+				$output .= "<th scope='col'>" . $data[$c] . "</th>";
 		}
-		$output .= "</tr></thead><tbody>";
-		echo $output;
-		$row++;
-		}else{
+		    $output .= "</tr></thead><tbody>";
+		    echo $output;
+		    $row++;
 
-			$output = "<tr>";
-        	for ($c=0; $c < $num; $c++) {
-        		$output .= "<td>" . $data[$c] . "</td>";
-		}
-		$output .= "</tr>\n";	
-		echo $output;
-	    	$row++;
-		}
-
-	    
-	}echo "</tbody>";
+	    }else{
+		/* Not headers? Generate body */
+		    $output = "<tr>";
+		    for ($c=0; $c < $num; $c++) {
+			    $output .= "<td>" . $data[$c] . "</td>";
+		    }
+		    $output .= "</tr>\n";	
+		    echo $output;
+		    $row++;
+	    }
+    }
+    echo "</tbody>";
     fclose($handle);
 }
 ?>
-
 </div>
-
-
 </body>
 </html>
