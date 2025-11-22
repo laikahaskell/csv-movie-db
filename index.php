@@ -16,19 +16,7 @@
 <!-- Main content table here -->
 <div class="mx-5">
 <table class="table">
-<thead>
 
-<!--<tr>
-	<th scope="col">film</th>
-	<th scope="col">director</th>
-	<th scope="col">release</th>
-	<th scope="col">year</th>
-	<th scope="col">rating</th>
-</tr> -->
-
-</thead>
-
-<tbody>
 <?php
 
 $row = 0;
@@ -45,7 +33,7 @@ if (($handle = fopen("movies.csv", "r")) !== FALSE) {
 		$row++;
 		}else{
 
-		$output = "<tr><th scope='row'>$row</th>";
+			$output = "<tr>";
         	for ($c=0; $c < $num; $c++) {
         		$output .= "<td>" . $data[$c] . "</td>";
 		}
