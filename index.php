@@ -14,11 +14,17 @@
 <div class="mx-5">
 <table class="table">
 <?php
+$arr = [];
 $row = 1;
 if (($handle = fopen("movies.csv", "r")) !== FALSE) {
-	$data = fgetcsv($handle,0,",");
-	$headers = array_splice($data, 0);
-	
+
+	while(($data = fgetcsv($handle,0,",")) !== FALSE){
+		$arr[] = $data;
+	}
+	fclose($handle);
+
+	$headers = array_shift($arr);
+
 	// Header	
 	$output = "<thead><tr>";
 	foreach($headers as $val){
@@ -26,16 +32,25 @@ if (($handle = fopen("movies.csv", "r")) !== FALSE) {
 	}
 	echo $output . "</tr></thead><tbody>\n";
 
-	// Entry rows
-	while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
-	    $num = count($data);
-	    $output = "<tr>";
-	    for ($c=0; $c < $num; $c++) {
-		    $output .= "<td>" . $data[$c] . "</td>";
-	    }
-	    $output .= "</tr>\n";	
-	    echo $output;
-	    $row++;
+	// Create assoc. array using headers
+	$films = [];
+	foreach($arr as $film){
+		$films[] = array_combine($headers, $film);
+	}
+
+	// Sort by year
+	// In the future, can use ajax call to resort based on selected col
+	$year = array_column($films, 'release year');
+	array_multisort($year, SORT_DESC,$films);
+
+	foreach($films as $film){
+		$output = "<tr>";
+		foreach($film as $x){
+		    $output .= "<td>" . $x . "</td>";
+		}
+		$output .= "</tr>\n";	
+		echo $output;
+		$row++;
 	    }
     echo "</tbody>";
     fclose($handle);
