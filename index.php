@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <head>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,38 +18,48 @@
 <table class="table">
 <thead>
 
-<tr>
+<!--<tr>
 	<th scope="col">film</th>
 	<th scope="col">director</th>
 	<th scope="col">release</th>
 	<th scope="col">year</th>
 	<th scope="col">rating</th>
-</tr>
+</tr> -->
 
 </thead>
 
 <tbody>
 <?php
 
-$row = -1;
+$row = 0;
 if (($handle = fopen("movies.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-	    if($row != -1){
 		$num = count($data);
+		if($row == 0){
+			$output = "<thead><tr>";
+		for($c=0; $c < $num; $c++) {
+			$output .= "<th scope='col'>" . $data[$c] . "</th>";
+		}
+		$output .= "</tr></thead><tbody>";
+		echo $output;
 		$row++;
+		}else{
+
 		$output = "<tr><th scope='row'>$row</th>";
         	for ($c=0; $c < $num; $c++) {
         		$output .= "<td>" . $data[$c] . "</td>";
 		}
-		$output .= "</tr>";	
+		$output .= "</tr>\n";	
 		echo $output;
-	    }else{$row++;}
+	    	$row++;
+		}
+
 	    
-	}
+	}echo "</tbody>";
     fclose($handle);
 }
 ?>
-</tbody>
+
 </div>
 
 
