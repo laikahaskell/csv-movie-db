@@ -2,8 +2,13 @@
 ![Sample movie table](example.png)
 Renders a csv file of movie ratings.
 
+### How to run:
+- Set up an apache server that can run php, and have it load `index.php`.
+- Create a `movies.csv` file in the directory for the script to read. An `movies.csv` template has been provided, but you can use any headers you want; the script will dynamically load any csv file based on its table headers.
+    - A script called `write.csv` has been provided that will write columns for you using the columns in `movies.csv`.
+
 ### TODO:
-* Sort output by column with Ajax
+* Change to Datatables
 * Button to remove entries?
 * Form to add entries
 * [Use API to fetch movie posters](https://www.omdbapi.com)
