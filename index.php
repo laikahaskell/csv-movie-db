@@ -54,7 +54,6 @@ if (($handle = fopen("movies.csv", "r")) !== FALSE) {
 		echo $output;
 		$row++;
 	}
-	$footers = "";
 	echo "</tbody><tfoot><tr>" . $footers . "</tr></tfoot></table>";
 
 }
