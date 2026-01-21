@@ -11,12 +11,12 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/2.3.6/css/dataTables.dataTables.css" />
 <script src="https://cdn.datatables.net/2.3.6/js/dataTables.js"></script>
 <title>Movies</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 <!-- Main content table below -->
-<div class="mx-5">
+<div class="container-fluid">
 <table id="movies" class="display">
 <?php
 $arr = [];
