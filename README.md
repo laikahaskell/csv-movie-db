@@ -1,6 +1,7 @@
 # csv-movie-db
+Renders a csv file of movie ratings. See a live example [here](https://laikahaskell.dev/movies/).
+
 ![Sample movie table](example.jpg)
-Renders a csv file of movie ratings.
 
 ### How to run:
 - Set up an apache server that can run php, and have it load `index.php`.
