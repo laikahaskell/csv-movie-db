@@ -1,5 +1,5 @@
 # csv-movie-db
-![Sample movie table](example.png)
+![Sample movie table](example.jpg)
 Renders a csv file of movie ratings.
 
 ### How to run:
