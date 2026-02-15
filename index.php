@@ -61,4 +61,3 @@ if (($handle = fopen("movies.csv", "r")) !== FALSE) {
 
 </div>
 <script>new DataTable('#movies');</script>
-</body>
